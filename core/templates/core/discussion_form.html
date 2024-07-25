@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Start Discussion{% endblock %}
+
+{% block content %}
+    <h1>Start Discussion in {{ course.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Discussion</button>
+    </form>
+{% endblock %}
