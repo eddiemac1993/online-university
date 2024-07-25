@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome to Online University{% endblock %}
+
+{% block content %}
+<style>
+    .homepage {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+    h1, h2 {
+        color: #2c3e50;
+    }
+    h1 {
+        font-size: 2.5em;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+    }
+    h2 {
+        font-size: 1.8em;
+        margin-top: 30px;
+    }
+    p {
+        color: #34495e;
+        line-height: 1.6;
+    }
+    .cta-button {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+        background-color: #2980b9;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    li {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
+    li::before {
+        content: '✓';
+        color: #2ecc71;
+        position: absolute;
+        left: 0;
+    }
+</style>
+
+<div class="homepage">
+    <h1>Welcome to Online University</h1>
+    <p>Explore our courses and start learning today!</p>
+    
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}! Ready to continue learning?</p>
+        <a href="{% url 'course_list' %}" class="cta-button">View Courses</a>
+    {% else %}
+        <p>Join our community of learners:</p>
+        <a href="{% url 'signup' %}" class="cta-button">Sign Up</a>
+        <a href="{% url 'login' %}" class="cta-button">Log In</a>
+    {% endif %}
+    
+    <h2>Featured Courses</h2>
+    <!-- You can add a list of featured courses here -->
+    
+    <h2>Why Choose Us?</h2>
+    <ul>
+        <li>High-quality courses</li>
+        <li>Expert instructors</li>
+        <li>Flexible learning schedule</li>
+        <li>Interactive discussions</li>
+    </ul>
+</div>
+{% endblock %}

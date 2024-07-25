@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    <p>Instructor: {{ course.instructor.username }}</p>
+    <p>Start Date: {{ course.start_date }}</p>
+    <p>End Date: {{ course.end_date }}</p>
+    
+    <h2>Lessons</h2>
+    <ul>
+    {% for lesson in course.lessons.all %}
+        <li>{{ lesson.title }}</li>
+    {% empty %}
+        <li>No lessons available.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'create_lesson' course.id %}">Add Lesson</a>
+    
+    <h2>Assignments</h2>
+    <ul>
+    {% for assignment in course.assignments.all %}
+        <li>{{ assignment.title }} - Due: {{ assignment.due_date }}</li>
+    {% empty %}
+        <li>No assignments available.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'create_assignment' course.id %}">Add Assignment</a>
+    
+    <h2>Discussions</h2>
+    <ul>
+    {% for discussion in course.discussions.all %}
+        <li>{{ discussion.user.username }}: {{ discussion.content }}</li>
+    {% empty %}
+        <li>No discussions yet.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'create_discussion' course.id %}">Start Discussion</a>
+{% endblock %}
